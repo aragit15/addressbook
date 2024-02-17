@@ -1,16 +1,17 @@
 pipeline {
     agent any
 
-    //tools {
+    tools {
         // Install the Maven version configured as "M3" and add it to the path.
-      //  maven "M3"
-    //}
+        maven "mymaven"
+    }
 
     stages {
         stage('compile') {
             steps {
                 script{
                     echo "compiling the code"
+                    sh "mvn compile"
                 }
             }
 
@@ -19,6 +20,12 @@ pipeline {
             steps {
                 script{
                     echo "Running the test"
+                    sh "mvn test"
+                }
+            }
+            post{
+                always{
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
 
@@ -27,6 +34,7 @@ pipeline {
             steps {
                 script{
                     echo "creating the package"
+                    sh "mvn package"
                 }
             }
 
