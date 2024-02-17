@@ -18,6 +18,7 @@ pipeline {
 
         }
         stage('UnitTest') {
+            agent any
             steps {
                 script{
                     echo "Running the test"
@@ -32,6 +33,7 @@ pipeline {
 
         }
         stage('Package') {
+            agent any
             steps {
                 script{
                     echo "creating the package"
