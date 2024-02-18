@@ -28,7 +28,7 @@ pipeline {
                     echo "Running the test"
                     sh "mvn test"
                 }
-                }
+                
             }
             post{
                 always{
